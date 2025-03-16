@@ -1,0 +1,83 @@
+[
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [E-Herramientas]",
+    "imagen": "https://i.imgur.com/uKNAOy7.png",
+    "hour": "02:00"
+  },
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [E-Herramientas]",
+    "imagen": "https://i.imgur.com/uKNAOy7.png",
+    "hour": "05:00"
+  },
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [E-Herramientas]",
+    "imagen": "https://i.imgur.com/uKNAOy7.png",
+    "hour": "15:00"
+  },
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [E-Herramientas]",
+    "imagen": "https://i.imgur.com/uKNAOy7.png",
+    "hour": "18:00"
+  },
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [E-Herramientas]",
+    "imagen": "https://i.imgur.com/uKNAOy7.png",
+    "hour": "21:00"
+  },
+
+
+
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [R-Carretera]",
+    "imagen": "https://i.imgur.com/wpFyU45.png",
+    "hour": "01:00"
+  },
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [R-Carretera]",
+    "imagen": "https://i.imgur.com/wpFyU45.png",
+    "hour": "08:00"
+  },
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [R-Carretera]",
+    "imagen": "https://i.imgur.com/wpFyU45.png",
+    "hour": "13:00"
+  },
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [R-Carretera]",
+    "imagen": "https://i.imgur.com/wpFyU45.png",
+    "hour": "17:00"
+  },
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [R-Carretera]",
+    "imagen": "https://i.imgur.com/wpFyU45.png",
+    "hour": "18:00"
+  },
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [R-Carretera]",
+    "imagen": "https://i.imgur.com/wpFyU45.png",
+    "hour": "22:00"
+  },
+
+
+
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [R-Industrial]",
+    "imagen": "https://i.imgur.com/NgK2cEe.png",
+    "hour": "00:00"
+  },
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [R-Industrial]",
+    "imagen": "https://i.imgur.com/NgK2cEe.png",
+    "hour": "03:00"
+  },
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [R-Industrial]",
+    "imagen": "https://i.imgur.com/NgK2cEe.png",
+    "hour": "11:00"
+  },
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [R-Industrial]",
+    "imagen": "https://i.imgur.com/NgK2cEe.png",
+    "hour": "20:00"
+  }
+]

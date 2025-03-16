@@ -1,0 +1,98 @@
+[
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [A-Empresarial]",
+    "imagen": "https://i.imgur.com/rRtlVUL.png",
+    "hour": "01:00"
+  },
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [A-Empresarial]",
+    "imagen": "https://i.imgur.com/rRtlVUL.png",
+    "hour": "10:00"
+  },
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [A-Empresarial]",
+    "imagen": "https://i.imgur.com/rRtlVUL.png",
+    "hour": "13:00"
+  },
+
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [R-Eléctrico]",
+    "imagen": "https://i.imgur.com/xA0YU44.png",
+    "hour": "03:00"
+  },
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [R-Eléctrico]",
+    "imagen": "https://i.imgur.com/xA0YU44.png",
+    "hour": "15:00"
+  },
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [R-Eléctrico]",
+    "imagen": "https://i.imgur.com/xA0YU44.png",
+    "hour": "18:00"
+  },
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [R-Eléctrico]",
+    "imagen": "https://i.imgur.com/xA0YU44.png",
+    "hour": "20:00"
+  },
+
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [L-Publica]",
+    "imagen": "https://i.imgur.com/ppNd0Kq.png",
+    "hour": "00:00"
+  },
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [L-Publica]",
+    "imagen": "https://i.imgur.com/ppNd0Kq.png",
+    "hour": "06:00"
+  },
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [L-Publica]",
+    "imagen": "https://i.imgur.com/ppNd0Kq.png",
+    "hour": "12:00"
+  },
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [L-Publica]",
+    "imagen": "https://i.imgur.com/ppNd0Kq.png",
+    "hour": "21:00"
+  },
+
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [S-Jardineria]",
+    "imagen": "https://i.imgur.com/0fqoYT3.png",
+    "hour": "04:00"
+  },
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [S-Jardineria]",
+    "imagen": "https://i.imgur.com/0fqoYT3.png",
+    "hour": "22:00"
+  },
+  
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [M-Gasolineras]",
+    "imagen": "https://i.imgur.com/tQwNf7P.png",
+    "hour": "02:00"
+  },
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [M-Gasolineras]",
+    "imagen": "https://i.imgur.com/tQwNf7P.png",
+    "hour": "08:00"
+  },
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [M-Gasolineras]",
+    "imagen": "https://i.imgur.com/tQwNf7P.png",
+    "hour": "16:00"
+  },
+
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [L-Rascacielos]",
+    "imagen": "https://i.imgur.com/HQddhsD.png",
+    "hour": "09:00"
+  },
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [L-Rascacielos]",
+    "imagen": "https://i.imgur.com/HQddhsD.png",
+    "hour": "12:00"
+  }
+
+]

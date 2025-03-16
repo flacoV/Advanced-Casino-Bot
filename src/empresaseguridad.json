@@ -1,0 +1,119 @@
+[
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [S-Escolta]",
+    "imagen": "https://i.imgur.com/OSPO41s.png",
+    "hour": "01:00"
+  },
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [S-Escolta]",
+    "imagen": "https://i.imgur.com/OSPO41s.png",
+    "hour": "08:00"
+  },
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [S-Escolta]",
+    "imagen": "https://i.imgur.com/OSPO41s.png",
+    "hour": "15:00"
+  },
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [S-Escolta]",
+    "imagen": "https://i.imgur.com/OSPO41s.png",
+    "hour": "21:00"
+  },
+
+
+
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [I-Alarmas]",
+    "imagen": "https://i.imgur.com/aJkpGwM.png",
+    "hour": "03:00"
+  },
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [I-Alarmas]",
+    "imagen": "https://i.imgur.com/aJkpGwM.png",
+    "hour": "06:00"
+  },
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [I-Alarmas]",
+    "imagen": "https://i.imgur.com/aJkpGwM.png",
+    "hour": "18:00"
+  },
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [I-Alarmas]",
+    "imagen": "https://i.imgur.com/aJkpGwM.png",
+    "hour": "20:00"
+  },
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [I-Alarmas]",
+    "imagen": "https://i.imgur.com/aJkpGwM.png",
+    "hour": "22:00"
+  },
+
+
+
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [R-Seguridad]",
+    "imagen": "https://i.imgur.com/DI91bXB.png",
+    "hour": "00:00"
+  },
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [R-Seguridad]",
+    "imagen": "https://i.imgur.com/DI91bXB.png",
+    "hour": "17:00"
+  },
+
+
+
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [R-Cajeros]",
+    "imagen": "https://i.imgur.com/u2Bcfxx.png",
+    "hour": "04:00"
+  },
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [R-Cajeros]",
+    "imagen": "https://i.imgur.com/u2Bcfxx.png",
+    "hour": "07:00"
+  },
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [R-Cajeros]",
+    "imagen": "https://i.imgur.com/u2Bcfxx.png",
+    "hour": "10:00"
+  },
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [R-Cajeros]",
+    "imagen": "https://i.imgur.com/u2Bcfxx.png",
+    "hour": "13:00"
+  },
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [R-Cajeros]",
+    "imagen": "https://i.imgur.com/u2Bcfxx.png",
+    "hour": "16:00"
+  },
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [R-Cajeros]",
+    "imagen": "https://i.imgur.com/u2Bcfxx.png",
+    "hour": "22:00"
+  },
+
+
+
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [R-Camaras]",
+    "imagen": "https://i.imgur.com/8TI4MPh.png",
+    "hour": "00:00"
+  },
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [R-Camaras]",
+    "imagen": "https://i.imgur.com/8TI4MPh.png",
+    "hour": "02:00"
+  },
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [R-Camaras]",
+    "imagen": "https://i.imgur.com/8TI4MPh.png",
+    "hour": "12:00"
+  },
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [R-Camaras]",
+    "imagen": "https://i.imgur.com/8TI4MPh.png",
+    "hour": "19:00"
+  }
+]

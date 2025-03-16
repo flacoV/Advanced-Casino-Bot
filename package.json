@@ -1,0 +1,20 @@
+{
+  "name": "Luca-bothub",
+  "version": "1.0.0",
+  "description": "Bot de discord para enviar la ubicacion del dealer en el servidor de gtahub.",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon src/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^14.13.0",
+    "dotenv": "^16.3.1",
+    "fs": "^0.0.1-security",
+    "moment": "^2.29.4",
+    "mongoose": "^7.5.2",
+    "node-cron": "^3.0.2",
+    "nodemon": "^3.0.1"
+  }
+}

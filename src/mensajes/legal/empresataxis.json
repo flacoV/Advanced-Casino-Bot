@@ -1,0 +1,116 @@
+[
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [S.Taxi]",
+    "imagen": "https://i.imgur.com/jlvoXig.png",
+    "hour": "02:00"
+  },
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [S.Taxi]",
+    "imagen": "https://i.imgur.com/jlvoXig.png",
+    "hour": "12:00"
+  },
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [S.Taxi]",
+    "imagen": "https://i.imgur.com/jlvoXig.png",
+    "hour": "20:00"
+  },
+
+
+  
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [S.Taxi]",
+    "imagen": "https://i.imgur.com/jlvoXig.png",
+    "hour": "05:00"
+  },
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [S.Taxi]",
+    "imagen": "https://i.imgur.com/jlvoXig.png",
+    "hour": "11:00"
+  },
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [S.Taxi]",
+    "imagen": "https://i.imgur.com/jlvoXig.png",
+    "hour": "14:00"
+  },
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [S.Taxi]",
+    "imagen": "https://i.imgur.com/jlvoXig.png",
+    "hour": "19:00"
+  },
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [S.Taxi]",
+    "imagen": "https://i.imgur.com/jlvoXig.png",
+    "hour": "21:00"
+  },
+
+  
+
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [B.Urbano A]",
+    "imagen": "https://i.imgur.com/qs0yD81.png",
+    "hour": "00:00"
+  },
+  
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [B.Urbano B]",
+    "imagen": "https://i.imgur.com/FQO9rkY.png",
+    "hour": "08:00"
+  },
+
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [B.Urbano C]",
+    "imagen": "https://i.imgur.com/IrRVJuC.png",
+    "hour": "00:00"
+  },
+
+
+
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [S.Mudanza]",
+    "imagen": "https://i.imgur.com/f5iY8Zm.png",
+    "hour": "03:00"
+  },
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [S.Mudanza]",
+    "imagen": "https://i.imgur.com/f5iY8Zm.png",
+    "hour": "07:00"
+  },
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [S.Mudanza]",
+    "imagen": "https://i.imgur.com/f5iY8Zm.png",
+    "hour": "16:00"
+  },
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [S.Mudanza]",
+    "imagen": "https://i.imgur.com/f5iY8Zm.png",
+    "hour": "20:00"
+  },
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [S.Mudanza]",
+    "imagen": "https://i.imgur.com/f5iY8Zm.png",
+    "hour": "22:00"
+  },
+
+
+
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [C.VIP]",
+    "imagen": "https://i.imgur.com/JwefTRP.png",
+    "hour": "01:00"
+  },
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [C.VIP]",
+    "imagen": "https://i.imgur.com/JwefTRP.png",
+    "hour": "12:00"
+  },
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [C.VIP]",
+    "imagen": "https://i.imgur.com/JwefTRP.png",
+    "hour": "17:00"
+  },
+  {
+    "mensaje": "¡Atencion! Hora de trabajar. [C.VIP]",
+    "imagen": "https://i.imgur.com/JwefTRP.png",
+    "hour": "22:00"
+  }
+]
