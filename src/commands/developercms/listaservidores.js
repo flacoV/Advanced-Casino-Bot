@@ -14,7 +14,7 @@ const serversPerPage = 10;
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName("clientes")
+        .setName("servidores")
         .setDescription("Lista de los clientes con el servicio activo."),
     async execute(interaction) {
         await client.login(process.env.token);
