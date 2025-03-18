@@ -16,8 +16,13 @@ const walletSchema = new mongoose.Schema({
     },
     promoCode: {
         type: String,
-        unique: true
+        unique: true,
+        sparse: true
     },
+    dineroApostado: { 
+        type: Number, 
+        default: 0
+     },
     transactions: [
         {
             type: {

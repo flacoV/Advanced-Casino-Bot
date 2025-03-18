@@ -38,6 +38,6 @@ module.exports = {
         // Guardar el código en la base de datos
         await Wallet.findByIdAndUpdate(existingWallet._id, { promoCode: chosenCode });
 
-        return interaction.reply({ content: `✅ Tu código promocional ahora es: **${chosenCode}**. Comparte este código y gana recompensas cuando otros lo usen en /crear.`, ephemeral: false });
+        return interaction.reply({ content: `✅ Tu código promocional ahora es: **${chosenCode}**. Comparte este código y gana recompensas cuando nuevos usuarios lo usen en su creacion de cartera.`, ephemeral: false });
     }
 };
