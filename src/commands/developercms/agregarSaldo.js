@@ -38,7 +38,7 @@ module.exports = {
         const embed = new EmbedBuilder()
         .setColor('#007c5a') // Naranja para advertencia
         .setTitle('¡Deposito Realizado!')
-        .setDescription(`Gracias por contar con nosotros! **${username}**.\n💰 **|| Balance Actual:** $${balance.toLocaleString()}\n🎟️ **|| Codigo de Referido:** ${promoCode}\n\nComparte tu **código** de referido con tus amigos para que reciban un bono de **$20,000** al unirse al casino. Tú también ganarás **$15,000**.`)
+        .setDescription(`Gracias por contar con nosotros! **${username}**.\n💰 **|| Balance Actual:** $${wallet.balance.toLocaleString()}\n🎟️ **|| Codigo de Referido:** ${promoCode}\n\nComparte tu **código** de referido con tus amigos para que reciban un bono de **$20,000** al unirse al casino. Tú también ganarás **$15,000**.`)
         .setFooter({ text: 'bet365 - Haz tu jugada, cambia tu destino', iconURL: 'https://i.imgur.com/SuTgawd.png' });
 
     return interaction.reply({ embeds: [embed], ephemeral: false });
