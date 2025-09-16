@@ -1,4 +1,5 @@
 const { EmbedBuilder, ChannelType, PermissionFlagsBits, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
+const TicketConfig = require("../schema/TicketConfig");
 
 module.exports = {
     data: {
@@ -12,6 +13,15 @@ module.exports = {
      */
     async execute(interaction, client) {
         try {
+            // Obtener configuración de tickets
+            const ticketConfig = await TicketConfig.findOne({ guildId: interaction.guild.id });
+            if (!ticketConfig) {
+                return interaction.reply({
+                    content: '❌ El sistema de tickets no está configurado. Contacta con un administrador.',
+                    ephemeral: true
+                });
+            }
+
             // Verificar si el usuario ya tiene un ticket abierto
             const existingChannel = interaction.guild.channels.cache.find(
                 (channel) => channel.name === `ticket-${interaction.user.username}`
@@ -45,7 +55,7 @@ module.exports = {
             const ticketChannel = await interaction.guild.channels.create({
                 name: `ticket-${interaction.user.username}`,
                 type: ChannelType.GuildText,
-                parent: process.env.TICKET_CATEGORY_ID, // ID de la categoría de tickets
+                parent: ticketConfig.ticketCategoryId, // Categoría de tickets desde la configuración
                 permissionOverwrites: [
                     {
                         id: interaction.guild.roles.everyone.id,
@@ -56,7 +66,7 @@ module.exports = {
                         allow: [PermissionFlagsBits.ViewChannel, PermissionFlagsBits.SendMessages],
                     },
                     {
-                        id: process.env.STAFF_ROLE_ID, // ID del rol de staff
+                        id: ticketConfig.staffRoleId, // ID del rol de staff desde la configuración
                         allow: [PermissionFlagsBits.ViewChannel, PermissionFlagsBits.SendMessages],
                     }
                 ],

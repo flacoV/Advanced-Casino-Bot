@@ -23,6 +23,10 @@ const walletSchema = new mongoose.Schema({
         type: Number, 
         default: 0
      },
+    usedPromoCode: {
+        type: String,
+        default: null
+    },
     transactions: [
         {
             type: {
