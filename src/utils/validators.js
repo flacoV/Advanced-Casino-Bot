@@ -71,7 +71,12 @@ const validateMultipliers = (multipliersStr) => {
         return { valid: false, error: 'Los multiplicadores son requeridos' };
     }
 
-    const multipliers = multipliersStr.split(' ').map(num => parseFloat(num));
+    // Limpiar el string y dividir por espacios
+    const cleanStr = multipliersStr.trim();
+    const multipliers = cleanStr.split(/\s+/).map(num => {
+        const parsed = parseFloat(num);
+        return parsed;
+    });
     
     if (multipliers.some(isNaN)) {
         return { valid: false, error: 'Uno o más multiplicadores no son válidos' };
@@ -81,8 +86,9 @@ const validateMultipliers = (multipliersStr) => {
         return { valid: false, error: 'El máximo de partidos para una combinada es 4' };
     }
 
-    if (multipliers.some(mult => mult < 1.01)) {
-        return { valid: false, error: 'Los multiplicadores deben ser mayores a 1.00' };
+    if (multipliers.some(mult => mult < 1.0)) {
+        const invalidMultipliers = multipliers.filter(mult => mult < 1.0);
+        return { valid: false, error: `Los multiplicadores deben ser 1.00 o mayores. Valores inválidos: ${invalidMultipliers.join(', ')}` };
     }
 
     return { valid: true, multipliers };

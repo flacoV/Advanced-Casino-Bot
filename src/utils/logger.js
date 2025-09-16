@@ -3,6 +3,7 @@
  */
 
 const { EmbedBuilder } = require('discord.js');
+const SystemStats = require('../schema/SystemStats');
 
 /**
  * Clase para manejar logs de transacciones y eventos del casino
@@ -10,18 +11,35 @@ const { EmbedBuilder } = require('discord.js');
 class CasinoLogger {
     constructor(client) {
         this.client = client;
-        this.logChannelId = process.env.LOG_CHANNEL_ID || '1351318876775776388';
+        this.betLogChannelId = process.env.LOG_CHANNEL_ID || '1351318876775776388'; // Canal para apuestas deportivas
+        this.walletLogChannelId = process.env.WALLET_LOG_CHANNEL_ID || null; // Canal para logs de wallets (opcional)
     }
 
     /**
-     * Obtiene el canal de logs
+     * Obtiene el canal de logs para apuestas
      * @returns {Promise<Channel|null>} Canal de logs o null si no se encuentra
      */
-    async getLogChannel() {
+    async getBetLogChannel() {
         try {
-            return await this.client.channels.fetch(this.logChannelId);
+            return await this.client.channels.fetch(this.betLogChannelId);
         } catch (error) {
-            console.error('❌ Error al obtener el canal de logs:', error);
+            console.error('❌ Error al obtener el canal de logs de apuestas:', error);
+            return null;
+        }
+    }
+
+    /**
+     * Obtiene el canal de logs para wallets (opcional)
+     * @returns {Promise<Channel|null>} Canal de logs o null si no se encuentra
+     */
+    async getWalletLogChannel() {
+        if (!this.walletLogChannelId) {
+            return null; // No hay canal configurado para wallets
+        }
+        try {
+            return await this.client.channels.fetch(this.walletLogChannelId);
+        } catch (error) {
+            console.error('❌ Error al obtener el canal de logs de wallets:', error);
             return null;
         }
     }
@@ -38,7 +56,7 @@ class CasinoLogger {
     async logBet(data) {
         const { userId, username, amount, type, details } = data;
         
-        const logChannel = await this.getLogChannel();
+        const logChannel = await this.getBetLogChannel();
         if (!logChannel) return;
 
         const embed = new EmbedBuilder()
@@ -105,8 +123,12 @@ class CasinoLogger {
     async logWalletCreation(data) {
         const { userId, username, initialBalance, adminId, promoCode } = data;
         
-        const logChannel = await this.getLogChannel();
-        if (!logChannel) return;
+        const logChannel = await this.getWalletLogChannel();
+        if (!logChannel) {
+            // Si no hay canal configurado para wallets, solo log en consola
+            console.log(`🆕 Nueva wallet creada: ${username} (${userId}) - Balance inicial: $${initialBalance.toLocaleString()}`);
+            return;
+        }
 
         const embed = new EmbedBuilder()
             .setTitle('🆕 Nueva Cartera Creada')
@@ -127,6 +149,43 @@ class CasinoLogger {
             await logChannel.send({ embeds: [embed] });
         } catch (error) {
             console.error('❌ Error al enviar log de creación de cartera:', error);
+        }
+    }
+
+    /**
+     * Actualiza las estadísticas del sistema
+     */
+    async updateSystemStats() {
+        try {
+            const stats = await SystemStats.getStats();
+            await stats.updateWalletStats();
+            console.log('📊 Estadísticas del sistema actualizadas');
+        } catch (error) {
+            console.error('❌ Error al actualizar estadísticas del sistema:', error);
+        }
+    }
+
+    /**
+     * Obtiene las estadísticas del sistema
+     * @returns {Promise<Object>} Estadísticas del sistema
+     */
+    async getSystemStats() {
+        try {
+            const stats = await SystemStats.getStats();
+            return {
+                totalWallets: stats.totalWallets,
+                totalDeposited: stats.totalDeposited,
+                totalBetAmount: stats.totalBetAmount,
+                totalWinnings: stats.totalWinnings,
+                totalSportsBets: stats.totalSportsBets,
+                totalSportsBetAmount: stats.totalSportsBetAmount,
+                totalBlackjackGames: stats.totalBlackjackGames,
+                totalBlackjackBetAmount: stats.totalBlackjackBetAmount,
+                lastUpdated: stats.lastUpdated
+            };
+        } catch (error) {
+            console.error('❌ Error al obtener estadísticas del sistema:', error);
+            return null;
         }
     }
 }

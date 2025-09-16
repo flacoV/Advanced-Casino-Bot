@@ -1,5 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const Wallet = require('../../schema/Wallet');
+const CasinoLogger = require('../../utils/logger');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -31,9 +32,18 @@ module.exports = {
 
         const { username, balance, promoCode } = wallet 
 
-        // Agregar saldo
+        // Agregar saldo y registrar transacción
         wallet.balance += amount;
+        wallet.transactions.push({
+            type: 'deposit',
+            amount: amount,
+            date: new Date()
+        });
         await wallet.save();
+
+        // Actualizar estadísticas del sistema
+        const logger = new CasinoLogger(interaction.client);
+        await logger.updateSystemStats();
 
         const embed = new EmbedBuilder()
         .setColor('#007c5a') // Naranja para advertencia

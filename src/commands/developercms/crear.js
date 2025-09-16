@@ -110,7 +110,7 @@ module.exports = {
 
             await newWallet.save();
 
-            // Log de creación de cartera
+            // Log de creación de cartera y actualizar estadísticas
             const logger = new CasinoLogger(interaction.client);
             await logger.logWalletCreation({
                 userId: discordId,
@@ -119,6 +119,9 @@ module.exports = {
                 adminId: interaction.user.id,
                 promoCode: usedPromoCode
             });
+            
+            // Actualizar estadísticas del sistema
+            await logger.updateSystemStats();
 
             const successEmbed = new EmbedBuilder()
                 .setColor('#097b5a')
