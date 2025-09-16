@@ -17,7 +17,7 @@ module.exports = {
                 });
             }
 
-            await interaction.deferReply({ ephemeral: true });
+            await interaction.deferReply({ ephemeral: false });
 
             // Obtener estadísticas del sistema
             const logger = new CasinoLogger(interaction.client);
@@ -25,8 +25,7 @@ module.exports = {
 
             if (!stats) {
                 return interaction.editReply({
-                    content: '❌ Error al obtener las estadísticas del sistema.',
-                    ephemeral: true
+                    content: '❌ Error al obtener las estadísticas del sistema.'
                 });
             }
 
@@ -67,8 +66,7 @@ module.exports = {
         } catch (error) {
             console.error('❌ Error en comando estadísticas:', error);
             await interaction.editReply({
-                content: '❌ Error al obtener las estadísticas del sistema.',
-                ephemeral: true
+                content: '❌ Error al obtener las estadísticas del sistema.'
             });
         }
     }

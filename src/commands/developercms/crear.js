@@ -1,6 +1,7 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const Wallet = require('../../schema/Wallet');
-const { validateAdminPermissions, validatePromoCode } = require('../../utils/validators');
+const PromoCode = require('../../schema/PromoCode');
+const { validateAdminPermissions } = require('../../utils/validators');
 const CasinoLogger = require('../../utils/logger');
 
 module.exports = {
@@ -36,6 +37,9 @@ module.exports = {
             const username = interaction.guild.members.cache.get(user.id)?.displayName || user.username;
             const discordId = user.id;
             const promoCode = interaction.options.getString('codigo');
+            
+            // Inicializar logger
+            const logger = new CasinoLogger(interaction.client);
 
             // Verificar si la cartera ya existe
             const existingWallet = await Wallet.findOne({ discordId });
@@ -53,45 +57,75 @@ module.exports = {
             let bonusGiven = false;
             let promoOwner = null;
             let usedPromoCode = null;
+            let promoCodeData = null;
 
             // Verificar si se ingresó un código promocional
             if (promoCode && promoCode.trim() !== "") {
-                const promoValidation = validatePromoCode(promoCode);
-                if (!promoValidation.valid) {
+                // Buscar el código promocional activo
+                promoCodeData = await PromoCode.findActiveCode(promoCode.trim());
+
+                if (!promoCodeData) {
                     const errorEmbed = new EmbedBuilder()
                         .setColor('#ff4444')
-                        .setTitle('❌ Código Promocional Inválido')
-                        .setDescription(promoValidation.error)
+                        .setTitle('❌ Código Promocional No Válido')
+                        .setDescription('El código promocional no existe, está inactivo o ha expirado.')
                         .setFooter({ text: 'bet365 - Sistema Administrativo', iconURL: 'https://i.imgur.com/SuTgawd.png' });
                     
                     return interaction.reply({ embeds: [errorEmbed], ephemeral: true });
                 }
 
-                // Buscar si el código promocional pertenece a alguien
-                promoOwner = await Wallet.findOne({ promoCode: promoValidation.cleanCode });
+                // Verificar si el usuario ya usó este código
+                if (promoCodeData.hasUserUsed(discordId)) {
+                    const errorEmbed = new EmbedBuilder()
+                        .setColor('#ff4444')
+                        .setTitle('❌ Código Ya Utilizado')
+                        .setDescription('Este usuario ya ha usado este código promocional anteriormente.')
+                        .setFooter({ text: 'bet365 - Sistema Administrativo', iconURL: 'https://i.imgur.com/SuTgawd.png' });
+                    
+                    return interaction.reply({ embeds: [errorEmbed], ephemeral: true });
+                }
+
+                // Buscar la cartera del propietario del código
+                promoOwner = await Wallet.findOne({ discordId: promoCodeData.ownerId });
 
                 if (!promoOwner) {
                     const errorEmbed = new EmbedBuilder()
                         .setColor('#ff4444')
-                        .setTitle('❌ Código Promocional No Encontrado')
-                        .setDescription('El código promocional ingresado no existe en el sistema.')
+                        .setTitle('❌ Error del Sistema')
+                        .setDescription('El propietario del código promocional no tiene una cartera válida.')
                         .setFooter({ text: 'bet365 - Sistema Administrativo', iconURL: 'https://i.imgur.com/SuTgawd.png' });
                     
                     return interaction.reply({ embeds: [errorEmbed], ephemeral: true });
                 }
 
-                // Aplicar bono al usuario que usa el código
-                balance = 20000; // 20K al usuario nuevo
-                usedPromoCode = promoValidation.cleanCode;
+                // Aplicar bono al usuario que usa el código (cliente nuevo)
+                balance = 20000; // 20K de bono al usuario nuevo
+                usedPromoCode = promoCodeData.code;
 
-                // Aplicar bono al dueño del código promocional
+                // Aplicar bono al dueño del código promocional (referidor)
                 promoOwner.balance += 15000;
                 promoOwner.transactions.push({
                     type: 'win',
                     amount: 15000,
-                    date: new Date()
+                    date: new Date(),
+                    description: `Bono por referido: ${username} usó código ${promoCodeData.code}`,
+                    gameType: 'referral'
                 });
                 await promoOwner.save();
+
+                // Registrar el uso del código
+                await promoCodeData.recordUsage(discordId, username);
+                
+                // Log del bono para el referidor
+                await logger.logTransaction({
+                    userId: promoOwner.discordId,
+                    username: promoOwner.username,
+                    amount: 15000,
+                    type: 'win',
+                    adminId: interaction.user.id,
+                    description: `Bono por referido: ${username} usó código ${promoCodeData.code}`
+                });
+                
                 bonusGiven = true;
             }
 
@@ -104,14 +138,15 @@ module.exports = {
                 transactions: balance > 0 ? [{
                     type: 'deposit',
                     amount: balance,
-                    date: new Date()
+                    date: new Date(),
+                    description: usedPromoCode ? `Bono de bienvenida + código promocional: ${usedPromoCode}` : 'Depósito inicial',
+                    gameType: usedPromoCode ? 'referral' : 'deposit'
                 }] : []
             });
 
             await newWallet.save();
 
             // Log de creación de cartera y actualizar estadísticas
-            const logger = new CasinoLogger(interaction.client);
             await logger.logWalletCreation({
                 userId: discordId,
                 username,
@@ -135,12 +170,24 @@ module.exports = {
                 .setFooter({ text: 'bet365 - Sistema Administrativo', iconURL: 'https://i.imgur.com/SuTgawd.png' })
                 .setTimestamp();
 
-            if (bonusGiven) {
-                successEmbed.addFields({ 
-                    name: '🏆 Bono Aplicado', 
-                    value: 'Código promocional aplicado con éxito', 
-                    inline: false 
-                });
+            if (bonusGiven && promoCodeData) {
+                successEmbed.addFields(
+                    { 
+                        name: '🏆 Bonos Aplicados', 
+                        value: `**Usuario nuevo:** $20,000\n**Referidor:** $15,000`, 
+                        inline: false 
+                    },
+                    { 
+                        name: '👤 Propietario del Código', 
+                        value: `${promoCodeData.ownerUsername}`, 
+                        inline: true 
+                    },
+                    { 
+                        name: '📊 Usos del Código', 
+                        value: `${promoCodeData.totalUses}`, 
+                        inline: true 
+                    }
+                );
             }
 
             return interaction.reply({ embeds: [successEmbed], ephemeral: false });

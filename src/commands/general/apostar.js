@@ -64,7 +64,8 @@ module.exports = {
             userWallet.transactions.push({ 
                 type: 'bet', 
                 amount: monto,
-                date: new Date()
+                date: new Date(),
+                gameType: 'sports'
             });
             await userWallet.save();
 
@@ -87,6 +88,9 @@ module.exports = {
                 type: 'Apuestas Deportivas',
                 details: `Partidos: ${partidos} | Canal: ${interaction.channel.name}`
             });
+
+            // Actualizar estadísticas del sistema
+            await logger.updateSystemStats();
 
         } catch (error) {
             console.error('❌ Error en comando apostar:', error);

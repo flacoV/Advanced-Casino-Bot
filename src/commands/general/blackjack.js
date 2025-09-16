@@ -67,7 +67,8 @@ module.exports = {
             userWallet.transactions.push({ 
                 type: 'bet', 
                 amount: betAmount,
-                date: new Date()
+                date: new Date(),
+                gameType: 'blackjack'
             });
             await userWallet.save();
 
@@ -93,6 +94,9 @@ module.exports = {
                 type: 'Blackjack',
                 details: `Nueva partida iniciada`
             });
+
+            // Actualizar estadísticas del sistema
+            await logger.updateSystemStats();
 
             await interaction.reply({ 
                 embeds: [gameEmbed], 

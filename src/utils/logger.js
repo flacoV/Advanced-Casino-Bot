@@ -79,23 +79,48 @@ class CasinoLogger {
     }
 
     /**
-     * Registra una transacción de depósito/retiro
+     * Registra una transacción de depósito/retiro/ganancia
      * @param {Object} data - Datos de la transacción
      * @param {string} data.userId - ID del usuario
      * @param {string} data.username - Nombre del usuario
      * @param {number} data.amount - Monto de la transacción
-     * @param {string} data.type - Tipo de transacción (deposit, withdraw)
+     * @param {string} data.type - Tipo de transacción (deposit, withdraw, win)
      * @param {string} data.adminId - ID del administrador que realizó la acción
+     * @param {string} data.description - Descripción adicional (opcional)
      */
     async logTransaction(data) {
-        const { userId, username, amount, type, adminId } = data;
+        const { userId, username, amount, type, adminId, description } = data;
         
-        const logChannel = await this.getLogChannel();
+        // Usar el canal de logs de apuestas para transacciones de ganancias
+        const logChannel = await this.getBetLogChannel();
         if (!logChannel) return;
 
+        let title, color, emoji;
+        switch (type) {
+            case 'deposit':
+                title = '💰 Registro de Depósito';
+                color = '#097b5a';
+                emoji = '💰';
+                break;
+            case 'withdraw':
+                title = '💸 Registro de Retiro';
+                color = '#ff4444';
+                emoji = '💸';
+                break;
+            case 'win':
+                title = '🏆 Pago de Ganancia';
+                color = '#ffe417';
+                emoji = '🏆';
+                break;
+            default:
+                title = '💰 Registro de Transacción';
+                color = '#007c5a';
+                emoji = '💰';
+        }
+
         const embed = new EmbedBuilder()
-            .setTitle(`💰 Registro de ${type === 'deposit' ? 'Depósito' : 'Retiro'}`)
-            .setColor(type === 'deposit' ? '#097b5a' : '#ff4444')
+            .setTitle(title)
+            .setColor(color)
             .addFields(
                 { name: '👤 Usuario', value: `<@${userId}> (${username})`, inline: true },
                 { name: '💰 Monto', value: `$${amount.toLocaleString()}`, inline: true },
@@ -103,6 +128,11 @@ class CasinoLogger {
             )
             .setTimestamp()
             .setFooter({ text: 'bet365 - Sistema de Logs', iconURL: 'https://i.imgur.com/SuTgawd.png' });
+
+        // Agregar descripción si existe
+        if (description) {
+            embed.addFields({ name: '📝 Descripción', value: description, inline: false });
+        }
 
         try {
             await logChannel.send({ embeds: [embed] });

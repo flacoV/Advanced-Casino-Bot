@@ -76,10 +76,14 @@ systemStatsSchema.methods.updateWalletStats = async function() {
             }
         ]);
         
-        console.log('📊 Wallet stats result:', walletStats);
-        
-        // Calcular el total depositado de manera más simple
+        // Calcular el total depositado y estadísticas específicas de apuestas
         let totalDeposited = 0;
+        let totalSportsBets = 0;
+        let totalSportsBetAmount = 0;
+        let totalBlackjackGames = 0;
+        let totalBlackjackBetAmount = 0;
+        let totalWinnings = 0;
+        
         const allWallets = await Wallet.find({});
         
         for (const wallet of allWallets) {
@@ -87,22 +91,44 @@ systemStatsSchema.methods.updateWalletStats = async function() {
                 for (const transaction of wallet.transactions) {
                     if (transaction.type === 'deposit') {
                         totalDeposited += transaction.amount;
-                        console.log(`💰 Depósito encontrado: ${wallet.username} - $${transaction.amount.toLocaleString()}`);
+                    } else if (transaction.type === 'bet') {
+                        // Distinguir entre apuestas deportivas y blackjack
+                        if (transaction.gameType === 'sports') {
+                            totalSportsBets++;
+                            totalSportsBetAmount += transaction.amount;
+                        } else if (transaction.gameType === 'blackjack') {
+                            totalBlackjackGames++;
+                            totalBlackjackBetAmount += transaction.amount;
+                        } else {
+                            // Para transacciones antiguas sin gameType, asumir que son deportivas
+                            totalSportsBets++;
+                            totalSportsBetAmount += transaction.amount;
+                        }
+                    } else if (transaction.type === 'win') {
+                        totalWinnings += transaction.amount;
                     }
                 }
             }
         }
         
+        // Actualizar estadísticas básicas
         if (walletStats.length > 0) {
             this.totalWallets = walletStats[0].totalWallets;
             this.totalBetAmount = walletStats[0].totalBetAmount;
         }
         
+        // Actualizar estadísticas específicas
         this.totalDeposited = totalDeposited;
+        this.totalSportsBets = totalSportsBets;
+        this.totalSportsBetAmount = totalSportsBetAmount;
+        this.totalBlackjackGames = totalBlackjackGames;
+        this.totalBlackjackBetAmount = totalBlackjackBetAmount;
+        this.totalWinnings = totalWinnings;
         this.lastUpdated = new Date();
+        
         await this.save();
         
-        console.log(`📊 Estadísticas actualizadas: ${this.totalWallets} wallets, $${this.totalDeposited.toLocaleString()} depositado, $${this.totalBetAmount.toLocaleString()} apostado`);
+        console.log(`📊 Estadísticas actualizadas: ${this.totalWallets} wallets, $${this.totalDeposited.toLocaleString()} depositado, $${this.totalBetAmount.toLocaleString()} apostado, ${this.totalSportsBets} apuestas deportivas`);
         
     } catch (error) {
         console.error('❌ Error al actualizar estadísticas de wallet:', error);
