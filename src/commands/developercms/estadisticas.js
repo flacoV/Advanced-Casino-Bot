@@ -50,7 +50,7 @@ module.exports = {
                         inline: true
                     },
                     {
-                        name: '💰 Ganancias Totales',
+                        name: '💰 Ganancias totales de clientes',
                         value: `$${stats.totalWinnings.toLocaleString()}`,
                         inline: false
                     }

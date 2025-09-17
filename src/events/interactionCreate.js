@@ -38,6 +38,13 @@ module.exports = {
                 return;
             }
 
+            // 🔹 Manejo de Modales - Para acciones de moderación
+            if (interaction.isModalSubmit()) {
+                const moderationModals = require('../buttons.js/moderationModals.js');
+                await moderationModals.execute(interaction, client);
+                return;
+            }
+
         } catch (error) {
             console.error('❌ Error crítico en interactionCreate:', error);
             console.error('Stack trace:', error.stack);

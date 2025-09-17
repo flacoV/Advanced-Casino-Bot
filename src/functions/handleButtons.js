@@ -5,6 +5,8 @@ const TicketConfig = require("../schema/TicketConfig");
 const CasinoLogger = require("../utils/logger");
 
 const ticketHandler = require(".././buttons.js/crearTicket.js");
+const moderationActions = require(".././buttons.js/moderationActions.js");
+const moderationModals = require(".././buttons.js/moderationModals.js");
 
 const ticketClaims = new Map();
 
@@ -356,8 +358,13 @@ const handleButtonInteraction = async (interaction, client) => {
                     await handleBlackjackButton(interaction, client);
                     break;
 
+                // Manejo de botones de moderación
                 default:
-                    await interaction.reply({ content: "⚠️ Botón no reconocido.", ephemeral: true });
+                    if (customId.startsWith('mod_')) {
+                        await moderationActions.execute(interaction, client);
+                    } else {
+                        await interaction.reply({ content: "⚠️ Botón no reconocido.", ephemeral: true });
+                    }
                         }
                     })(),
                     timeoutPromise
